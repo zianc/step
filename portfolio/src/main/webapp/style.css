@@ -1,9 +1,53 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+html {
+    font-size: 62.5%;
+    font-family: monospace;
+    color: white;
 }
 
-#greeting-container {
-  margin-top: 20px;
+body {
+    background: black;
+}
+
+.wrapper {
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.external-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.icon {
+    max-width: 5rem;
+    margin: 0.5rem;
+}
+
+.path {
+    display: flex;
+    flex-direction: column;
+}
+
+.path-stop {
+    font-size: 2rem;
+    display: flex;
+    max-width: 70rem;
+    padding: 1rem;
+}
+
+.path-stop-img {
+    max-width: 30rem;
+    align-self: center;
+    margin: 0 3rem 0 1rem;
+}
+
+#intro {
+    font-size: 10rem;
 }
