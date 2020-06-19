@@ -7,7 +7,7 @@
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
-    <body onload="addCommentsToDOM(5)">
+    <body>
         <div id="wrapper">
             <div id="content">
                 <div id="header">
@@ -119,18 +119,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="msg"> 
-                    <form class="fade" id="comment-form" action="/data" method="POST">
-                        <textarea id="comment-form-box" name="comment" placeholder="Leave a comment!"></textarea>
-                        <br/><br/>
-                        <input id="comment-form-input" type="submit" />
-                    </form>
+                <div class="msg">
+                    <div id="msg-form"></div>
                     <div id="msg-footer">
                         <h2>Previous Comments</h2>
                         <hr/>
                         <div id="msg-container"></div>
+                        <script>addCommentsToDOM(5)</script>
                         <hr/>
-                        <input onchange="addCommentsToDOM(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
+                        <div id="button-area"></div>
+                        <script>getLogin()</script>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,77 @@
 // limitations under the License.
 
 /* 
+ * If user is not logged in, create a login button that will allow the user to
+ * login and add it to the DOM. Otherwise, create the comment input form and 
+ * the button to restrict number of comments and add them to the DOM.
+ */
+function getLogin() {
+    fetch("/login")
+    .then(response => response.json())
+    .then((result) => {
+        const button_area = document.getElementById("button-area");
+        const msg_form = document.getElementById("msg-form");
+        button_area.innerHTML = '';
+        let button = document.createElement('button');
+        if (result.loggedIn == 1) {
+            /* Allow logged in users to submit comments. */
+            let form = document.createElement('form');
+            form.id = "comment-form";
+            form.action = "/data";
+            form.method = "POST";
+
+            let textarea = document.createElement('textarea');
+            textarea.id = "comment-form-box";
+            textarea.name = "comment";
+            textarea.placeholder = "LEAVE A COMMENT!";
+            form.appendChild(textarea);
+
+            let line_break = document.createElement('br');
+            form.appendChild(line_break);
+
+            let form_input = document.createElement('input');
+            form_input.id = "comment-form-input";
+            form_input.type = "submit";
+            form.appendChild(form_input);
+            form.style.marginTop = "10rem";
+            msg_form.appendChild(form);
+            msg_form.style.width = "75%";
+
+            /* Allow logged in users to change the number of comments. */
+            let input = document.createElement('input');
+            input.addEventListener('change', () => { getComments(input.value); });
+            input.type = "number";
+            input.id = "quantitiy";
+            input.name = "limit";
+            input.min = "0";
+            input.placeholder = "MAX COMMENTS";
+            input.style.padding = "0.5rem";
+            input.style.margin = "1rem";
+            button_area.append(input);
+
+            button.setAttribute('id', 'logout');
+            button.innerHTML = "LOGOUT";
+            button.addEventListener('click', () => {
+                window.location.href = result.URL;
+            });
+            button.style.padding = "0.5rem";
+            button.style.margin = "1rem";
+            button_area.appendChild(button);
+        } else {
+            /* Create a login button that redirects to login page when clicked. */
+            button.setAttribute('id', 'login');
+            button.innerHTML = "LOGIN";
+            button.addEventListener('click', () => {
+                window.location.href = result.URL;
+            });
+            button_area.style.padding = "0.5rem";
+            button.style.margin = "1rem";
+            button_area.appendChild(button);
+        }
+    });
+}
+
+/* 
  * Fade in items on scroll when their upper bound crosses the bottom of 
  * of the screen.
  */
@@ -40,17 +111,34 @@ $(window).on("load", function() {
  * retrieved through query parameter.
  */
 function addCommentsToDOM(limit) {
+    if (limit == '')
+        return;
     fetch("/data?limit=".concat(limit))
     .then(response => response.json())
     .then((comments) => {
         const container = document.getElementById('msg-container');
         container.innerHTML = '';
-        comments.forEach((line) => {
-            /* Create comment and add text. */
-            const node = document.createElement("p");
-            const pnode = document.createTextNode(line);
+        comments.forEach((entry) => {
+            const comment = document.createElement('div');
+            comment.style.display = "flex";
+
+            /* Create comment and add text and delete icon. */
+            let text = entry.comment;
+            const node = document.createElement('p');
+            const pnode = document.createTextNode(text);
             node.appendChild(pnode);
-            container.appendChild(node);
+            comment.appendChild(node);
+
+            const del = document.createElement('input');
+            del.type = "image";
+            del.src = "images/x_icon.png";
+            del.addEventListener('click', () => {
+                deleteComment(entry);
+                comment.remove();
+            });
+            del.classList.add('delete-button');
+            comment.appendChild(del);
+            container.append(comment);
         })
     })
 }
@@ -59,10 +147,17 @@ function addCommentsToDOM(limit) {
  * Load Google Maps.
  */
 function createMap(map_name, latitude, longitude) {
-    const map = new google.maps.Map(
-        document.getElementById(map_name),
-        {center: {lat: latitude, lng: longitude}, zoom: 12}
-    );
+    let myLatLng = {lat: latitude, lng: longitude};
+
+    const map = new google.maps.Map(document.getElementById(map_name), {
+        center: myLatLng,
+        zoom: 12
+    });
+
+    let marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+    });
 }
 
 /*
@@ -79,16 +174,26 @@ function createFootprints(locationID) {
         footprint.src = "images/footprint.png";
         const direction = (i % 2 == 0) ? "right" : "left";
         footprint.classList.add("footprint-" + direction);
-
-        /* Vary width between steps for a more natural appearance. */
-        const rand = Math.floor(Math.random * (3) + 2);
+        const rand = Math.floor(Math.random * (4) + 3);
         if (direction.localeCompare("right") == 0) {
             footprint.style.margin = "1rem 1rem 1rem " + rand + "rem";
         } else {
             footprint.style.margin = "1rem " + rand + "rem 1rem 1rem";
         }
-        
         footprint.classList.add("fade");
         location.appendChild(footprint);
     }
+}
+
+/* 
+ * fsdf   sdsdfsent using ID as identifier. Does not redirect page after
+ * deletion.
+ */
+function deleteComment(comment) {
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-data', {
+        method: 'POST',
+        body: params
+    });
 }

@@ -19,8 +19,10 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-import com.google.gson.Gson;
 import com.google.sps.data.Constants;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
+import com.google.sps.data.Comment;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,11 +41,11 @@ public class DataServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {        
         int limit = Integer.parseInt(request.getParameter(Constants.COMMENTS_LIMIT));
-        Query query = new Query(Constants.COMMENTS_KIND);
+        Query query = new Query(Constants.COMMENTS_KIND).addSort(Constants.COMMENTS_TIMESTAMP, SortDirection.DESCENDING);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);
 
-        List<String> comments = new ArrayList<>();
+        List<Comment> comments = new ArrayList<>();
         int counter = 0;
         for (Entity entity : results.asIterable()) {
             /* Only return the number of comments as specified in query. */
@@ -52,7 +54,10 @@ public class DataServlet extends HttpServlet {
             } 
             counter++;
             String line = (String)entity.getProperty(Constants.COMMENTS_PROPERTY);
-            comments.add(line);
+            long id = (long)entity.getKey().getId();
+            long timestamp = (long)entity.getProperty(Constants.COMMENTS_TIMESTAMP);
+            Comment comment = new Comment(id, line, timestamp);
+            comments.add(comment);
         }
 
         Gson gson = new Gson();
@@ -60,14 +65,15 @@ public class DataServlet extends HttpServlet {
         response.getWriter().println(gson.toJson(comments));
     }
 
-    /*
-    * Adds comments to Datastore.
-    */
+    /* 
+     * Adds a comment to Datastore, with corresponding time and ID.
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String comment = request.getParameter(Constants.COMMENTS_PROPERTY);
         Entity taskEntity = new Entity(Constants.COMMENTS_KIND);
         taskEntity.setProperty(Constants.COMMENTS_PROPERTY, comment);
+        taskEntity.setProperty(Constants.COMMENTS_TIMESTAMP, System.currentTimeMillis());
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(taskEntity);
         

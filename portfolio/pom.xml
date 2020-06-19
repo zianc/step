@@ -45,7 +45,7 @@
         <version>2.2.0</version>
         <configuration>
           <deploy.projectId>zianchen-step-2020</deploy.projectId>
-          <deploy.version>pr-4</deploy.version>
+          <deploy.version>pr-5</deploy.version>
         </configuration>
       </plugin>
     </plugins>
