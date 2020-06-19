@@ -16,13 +16,25 @@ body {
 .content {
     display: flex;
     flex-direction: column;
-    text-align: center;
     align-items: center;
+    margin-top: 10rem;
 }
 
-.external-links {
+#header {
+    display: flex;
+    flex-direction: column;
+}
+
+#intro {
+    font-size: 10rem;
+    align-self: center;
+    margin-top: 15rem;
+}
+
+#external-links {
     display: flex;
     flex-direction: row;
+    align-self: center;
 }
 
 .icon {
@@ -30,24 +42,66 @@ body {
     margin: 0.5rem;
 }
 
-.path {
+#path {
     display: flex;
     flex-direction: column;
+    margin-top: 6rem;
 }
 
 .path-stop {
-    font-size: 2rem;
     display: flex;
-    max-width: 70rem;
+    align-self: center;
+    align-content: center;
+    padding: 10rem;
+}
+
+#path-stop-img-me {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
+#path-stop-img-swedev {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-left: 3rem;
+}
+
+#path-stop-img-lahacks {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
+#path-stop-img-creativelabs {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-left: 3rem;
+}
+
+.path-stop-desc {
+    font-size: 2rem;
+    max-width: 40rem;
     padding: 1rem;
 }
 
-.path-stop-img {
-    max-width: 30rem;
-    align-self: center;
-    margin: 0 3rem 0 1rem;
+.path-connecter {
+    max-height: 40rem;
 }
 
-#intro {
-    font-size: 10rem;
+#footer {
+    max-width: 100rem;
+    align-self: center;
+}
+
+#outro {
+    font-size: 5rem;
+    text-align: center;
+    align-self: center;
+}
+
+#footer-desc {
+    font-size: 2.5rem;
+    text-align: center;
+    align-self: center;
 }
