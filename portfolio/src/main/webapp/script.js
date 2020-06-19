@@ -101,7 +101,7 @@ function addCommentsToDOM(limit) {
             const pnode = document.createTextNode(text);
             node.appendChild(pnode);
             comment.appendChild(node);
- 
+
             const del = document.createElement('input');
             del.type = 'image';
             del.src = 'images/x_icon.png';
@@ -115,24 +115,22 @@ function addCommentsToDOM(limit) {
         })
     })
 }
- 
+
 /*
  * Load Google Maps.
  */
 function createMap(map_name, latitude, longitude) {
     let myLatLng = {lat: latitude, lng: longitude};
- 
     const map = new google.maps.Map(document.getElementById(map_name), {
         center: myLatLng,
         zoom: 12
     });
- 
     let marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
     });
 }
- 
+
 /*
  * Creates set of footprints from one div to the next. Each footprint is given
  * a random horizontal positioning between 3rem to 5rem off center.
