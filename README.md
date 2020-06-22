@@ -1,1 +1,1 @@
-This repo contains Zian Chen's portfolio and STEP projects
+This repo contains Zian Chen's portfolio and STEP projects.
