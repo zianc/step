@@ -30,3 +30,11 @@ $(window).on("load", function() {
         });
     }).scroll();
 });
+
+function getMessage() {
+    fetch('/data')
+    .then(response => response.text())
+    .then((message) => {
+        document.getElementById('msg-container').innerHTML = message;
+    });
+}

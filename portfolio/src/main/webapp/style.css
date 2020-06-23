@@ -109,3 +109,17 @@ body {
 .fade {
     opacity: 1;
 }
+
+#msg {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+}
+
+#msg-btn {
+    align-self: center;
+}
+
+#msg-container {
+    align-self: center;
+}
