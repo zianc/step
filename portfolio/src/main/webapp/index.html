@@ -100,13 +100,16 @@
                         </p>
                     </div>
                 </div>
-                <div id="msg"> 
+                <div class="msg"> 
                     <form id="comment-form" action="/data" method="POST">
-                        <textarea id="comment-form-box" name="comment">Leave a comment!</textarea>
+                        <textarea id="comment-form-box" name="comment" placeholder="Leave a comment!"></textarea>
                         <br/><br/>
                         <input id="comment-form-input" type="submit" />
                     </form>
-                    <div id="msg-container"></div>
+                    <div id="msg-container">
+                        <h2>Previous Comments</p>
+                        <hr/>
+                    </div>
                 </div>
             </div>
         </div>
