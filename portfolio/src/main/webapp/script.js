@@ -35,6 +35,8 @@ function getMessage() {
     fetch('/data')
     .then(response => response.text())
     .then((message) => {
-        document.getElementById('msg-container').innerHTML = message;
+        console.log(message);
+        let obj = JSON.parse(message);
+        document.getElementById('msg-container').innerText = message;
     });
 }
