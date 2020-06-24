@@ -27,8 +27,16 @@ import java.util.List;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> comments = Arrays.asList("Comment 1", "Comment 2", "Comment 3");
- 
+    private List<String> comments;// = Arrays.asList("Comment 1", "Comment 2", "Comment 3");
+    
+    @Override
+    public void init() {
+        comments = new ArrayList<String>();
+        comments.add("Comment 1");
+        comments.add("Comment 2");
+        comments.add("Comment 3");
+    }
+
     public String convertToJson() {
         Gson gson = new Gson();
         String json = gson.toJson(comments);
