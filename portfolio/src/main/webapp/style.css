@@ -8,6 +8,10 @@ body {
     background: black;
 }
 
+p {
+    font-size: 2rem;
+}
+
 .wrapper {
     justify-content: center;
     align-items: center;
@@ -80,7 +84,6 @@ body {
 }
 
 .path-stop-desc {
-    font-size: 2rem;
     max-width: 40rem;
     padding: 1rem;
 }
@@ -89,9 +92,11 @@ body {
     max-height: 40rem;
 }
 
-#footer {
+.footer {
     max-width: 100rem;
-    align-self: center;
+    align-self: center;    
+    padding-left: 15rem;
+    padding-right: 15rem;
 }
 
 #outro {
@@ -114,12 +119,22 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 10rem;
+    align-items: center;
+    padding: 2rem;
 }
 
-#msg-btn {
-    align-self: center;
+#comment-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%
 }
 
-#msg-container {
-    align-self: center;
+#comment-form-box {
+    width: 40%;
+    height: 20rem;
+}
+
+#comment-form-input {
+
 }

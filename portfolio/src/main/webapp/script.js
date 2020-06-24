@@ -31,12 +31,17 @@ $(window).on("load", function() {
     }).scroll();
 });
 
-function getMessage() {
+function getComments() {
     fetch('/data')
-    .then(response => response.text())
-    .then((message) => {
-        console.log(message);
-        let obj = JSON.parse(message);
-        document.getElementById('msg-container').innerText = message;
-    });
+    .then(response => response.json())
+    .then((comments) => {
+        console.log(comments);
+        const container = document.getElementById('msg-container');
+        comments.forEach((line) => {
+            let node = document.createElement("p");
+            let pnode = document.createTextNode(line);
+            node.appendChild(pnode);
+            container.appendChild(node);
+        })
+    })
 }
