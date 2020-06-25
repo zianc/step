@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -52,6 +55,12 @@ public class DataServlet extends HttpServlet {
         String comment = request.getParameter("comment");
         comments.add(comment);
         response.getWriter().println(comments);
+
+        Entity taskEntity = new Entity("Comments");
+        taskEntity.setProperty("comment", comment);
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        datastore.put(taskEntity);
+        
         response.sendRedirect("/index.html");
     }
 }

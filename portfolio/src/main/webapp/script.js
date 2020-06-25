@@ -35,7 +35,6 @@ function getComments() {
     fetch('/data')
     .then(response => response.json())
     .then((comments) => {
-        console.log(comments);
         const container = document.getElementById('msg-container');
         comments.forEach((line) => {
             let node = document.createElement("p");
