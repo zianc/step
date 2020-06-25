@@ -17,6 +17,8 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -30,32 +32,26 @@ import java.util.List;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    private List<String> comments;
-    
-    @Override
-    public void init() {
-        comments = new ArrayList<String>();
-    }
-
-    public String convertToJson() {
-        Gson gson = new Gson();
-        String json = gson.toJson(comments);
-        return json;
-    }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String json = convertToJson();
-        response.setContentType("application/json");
-        response.getWriter().println(json);
+        Query query = new Query("Comments");
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        PreparedQuery results = datastore.prepare(query);
+
+        List<String> comments = new ArrayList<>();
+        for (Entity entity : results.asIterable()) {
+            String comment = (String) entity.getProperty("comment");
+            comments.add(comment);
+        }
+
+        Gson gson = new Gson();
+        response.setContentType("application/json;");
+        response.getWriter().println(gson.toJson(comments));
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String comment = request.getParameter("comment");
-        comments.add(comment);
-        response.getWriter().println(comments);
-
         Entity taskEntity = new Entity("Comments");
         taskEntity.setProperty("comment", comment);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

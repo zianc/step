@@ -101,6 +101,11 @@ hr {
     margin-left: 3rem;
 }
 
+#path-stop-img-atac {
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
 .path-stop-desc {
     max-width: 40rem;
     padding: 1rem;
