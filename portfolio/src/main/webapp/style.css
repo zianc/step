@@ -96,7 +96,7 @@ input {
 }
 
 #path-stop-img-lahacks {
-    max-height: 40rem;
+    max-height: 42rem;
     border-radius: 1.2rem;
     margin-right: 3rem;
 }
@@ -108,12 +108,13 @@ input {
 }
 
 #path-stop-img-atac {
+    max-height: 40rem;
     border-radius: 1.2rem;
     margin-right: 3rem;
 }
 
 .path-stop-desc {
-    max-width: 30rem;
+    max-width: 40rem;
     padding: 1rem;
 }
 
