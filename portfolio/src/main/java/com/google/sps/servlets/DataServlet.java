@@ -42,12 +42,13 @@ public class DataServlet extends HttpServlet {
         List<String> comments = new ArrayList<>();
         int counter = 0;
         for (Entity entity : results.asIterable()) {
-            String comment = (String) entity.getProperty("comment");
-            comments.add(comment);
-            if (counter == limit - 1) {
+            /* Only return the number of comments as specified in query. */
+            if (counter == limit) {
                 break;
             } 
             counter++;
+            String line = (String)entity.getProperty("comment");
+            comments.add(line);
         }
 
         Gson gson = new Gson();

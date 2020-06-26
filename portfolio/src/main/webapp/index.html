@@ -40,7 +40,7 @@
                             arguably more importantly, how to deal with failure, 
                             learn the value of criticism, and rely not only on 
                             myself but those around me. Keep scrolling to track a 
-                            few stops along the way! 
+                            few stops along the way!
                         </p>
                     </div>
                     <img class="path-connecter" src="./images/white_path.svg"/>
@@ -86,6 +86,7 @@
                         </p>
                         <img id="path-stop-img-creativelabs" src="./images/creativelabs.png"/>
                     </div>
+                    <img class="path-connecter fade" src="./images/white_path.svg"/>
                     <div class="path-stop fade">
                         <img id="path-stop-img-atac" src="./images/atac.png"/>
                         <p class="path-stop-desc">Last summer, I was fortunate enough
@@ -114,7 +115,7 @@
                     </div>
                 </div>
                 <div class="msg"> 
-                    <form id="comment-form" action="/data" method="POST">
+                    <form class="fade" id="comment-form" action="/data" method="POST">
                         <textarea id="comment-form-box" name="comment" placeholder="Leave a comment!"></textarea>
                         <br/><br/>
                         <input id="comment-form-input" type="submit" />
@@ -123,6 +124,7 @@
                         <h2>Previous Comments</h2>
                         <hr/>
                         <div id="msg-container"></div>
+                        <hr/>
                         <input onchange="getComments(this.value)" type="number" id="quantity" name="limit" placeholder="Number of comments"/>
                     </div>
                 </div>

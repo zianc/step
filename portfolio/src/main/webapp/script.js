@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* 
+ * Fade in items on scroll when their upper bound crosses the bottom of 
+ * of the screen.
+ */
 $(window).on("load", function() {
     $(window).scroll(function() {
         var window_bottom = $(this).scrollTop() + $(this).innerHeight();
@@ -31,16 +35,20 @@ $(window).on("load", function() {
     }).scroll();
 });
 
+/*
+ * Retrieve comments from database. Set limit on the number of comments
+ * retrieved through query parameter.
+ */
 function getComments(limit) {
-    console.log(limit);
     fetch("/data?limit=".concat(limit))
     .then(response => response.json())
     .then((comments) => {
         const container = document.getElementById('msg-container');
         container.innerHTML = '';
         comments.forEach((line) => {
-            let node = document.createElement("p");
-            let pnode = document.createTextNode(line);
+            /* Create comment and add text. */
+            const node = document.createElement("p");
+            const pnode = document.createTextNode(line);
             node.appendChild(pnode);
             container.appendChild(node);
         })
