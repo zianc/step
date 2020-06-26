@@ -33,15 +33,21 @@ import java.util.List;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {        
+        int limit = Integer.parseInt(request.getParameter("limit"));
         Query query = new Query("Comments");
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);
 
         List<String> comments = new ArrayList<>();
+        int counter = 0;
         for (Entity entity : results.asIterable()) {
             String comment = (String) entity.getProperty("comment");
             comments.add(comment);
+            if (counter == limit - 1) {
+                break;
+            } 
+            counter++;
         }
 
         Gson gson = new Gson();

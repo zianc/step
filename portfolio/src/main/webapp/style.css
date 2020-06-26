@@ -24,10 +24,16 @@ button {
 
 h2 {
     font-size: 3rem;
+    margin-bottom: 1.2rem;
 }
 
 hr {
     color: white;
+    width: 100%;
+}
+
+input {
+    font-family: monospace;
 }
 
 .wrapper {
@@ -158,13 +164,24 @@ hr {
     height: 20rem;
 }
 
-#msg-container {
+#msg-footer {
+    border-style: solid;
+    border-color: white;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 10rem;
-    border-style: solid;
-    border-color: white;
-    border-radius: 1rem;
     width: 70%;
+}
+
+#msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#quantity {
+    margin: 2rem 0 3rem 0;
+    border-radius: 0.5rem;
 }

@@ -31,11 +31,13 @@ $(window).on("load", function() {
     }).scroll();
 });
 
-function getComments() {
-    fetch('/data')
+function getComments(limit) {
+    console.log(limit);
+    fetch("/data?limit=".concat(limit))
     .then(response => response.json())
     .then((comments) => {
         const container = document.getElementById('msg-container');
+        container.innerHTML = '';
         comments.forEach((line) => {
             let node = document.createElement("p");
             let pnode = document.createTextNode(line);
