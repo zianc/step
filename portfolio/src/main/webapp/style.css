@@ -84,25 +84,25 @@ input {
 }
 
 #path-stop-img-me {
-    max-height: 40rem;
+    max-height: 30rem;
     border-radius: 1.2rem;
     margin-right: 3rem;
 }
 
 #path-stop-img-swedev {
-    max-height: 40rem;
+    max-height: 30rem;
     border-radius: 1.2rem;
     margin-left: 3rem;
 }
 
 #path-stop-img-lahacks {
-    max-height: 40rem;
+    max-height: 30rem;
     border-radius: 1.2rem;
     margin-right: 3rem;
 }
 
 #path-stop-img-creativelabs {
-    max-height: 40rem;
+    max-height: 30rem;
     border-radius: 1.2rem;
     margin-left: 3rem;
 }
@@ -113,12 +113,12 @@ input {
 }
 
 .path-stop-desc {
-    max-width: 40rem;
+    max-width: 30rem;
     padding: 1rem;
 }
 
 .path-connecter {
-    max-height: 40rem;
+    max-height: 20rem;
 }
 
 .footer {
