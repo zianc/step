@@ -1,0 +1,65 @@
+html {
+    font-size: 62.5%;
+    font-family: monospace;
+    color: white;
+}
+ 
+body {
+    background: black;
+}
+ 
+h1 {
+    font-size: 8rem;
+}
+
+h2 {
+    font-size: 5rem;
+}
+ 
+p {
+    font-size: 2rem;
+    padding: 4rem;
+    text-align: center;
+}
+ 
+#location-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.location-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 65%;
+    border: 2rem;
+    border-color: white;
+    border-radius: 2rem;
+}
+
+#los-angeles-map, #los-gatos-map, #toronto-map, #putian-map {
+  border: thin solid black;
+  height: 50rem;
+  width: 50rem;
+}
+
+.footprints {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footprint-left {
+    max-height: 7rem;
+    transform: rotate(30deg);
+}
+
+.footprint-right {
+    max-height: 7rem;
+    transform: rotate(-10deg);
+}
+
+.fade {
+    opacity: 1;
+}

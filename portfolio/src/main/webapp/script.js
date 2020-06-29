@@ -21,7 +21,7 @@ $(window).on("load", function() {
         var window_bottom = $(this).scrollTop() + $(this).innerHeight();
 
         $(".fade").each(function() {
-            var obj_bottom = $(this).offset().top + $(this).outerHeight();
+            var obj_bottom = $(this).offset().top + ($(this).outerHeight() / 4.0);
             if (obj_bottom < window_bottom) {
                 if ($(this).css("opacity")==0) {
                     $(this).fadeTo(500, 1);
@@ -53,4 +53,36 @@ function addCommentsToDOM(limit) {
             container.appendChild(node);
         })
     })
+}
+
+/*
+ * Load Google Maps.
+ */
+function createMap(map_name, latitude, longitude) {
+    const map = new google.maps.Map(
+        document.getElementById(map_name),
+        {center: {lat: latitude, lng: longitude}, zoom: 12}
+    );
+}
+
+/*
+ * Creates set of footprints from one div to the next.
+ */
+function createFootprints(elem_name) {
+    const num_footprints = 6;
+    const elem = document.getElementById(elem_name);
+    for (let i = 0; i < num_footprints; i++) {
+        const footprint = document.createElement("img");
+        footprint.src = "images/footprint.png";
+        const direction = (i % 2 == 0) ? "right" : "left";
+        footprint.classList.add("footprint-" + direction);
+        const rand = Math.floor(Math.random * (3) + 2);
+        if (direction.localeCompare("right") == 0) {
+            footprint.style.margin = "1rem 1rem 1rem " + rand + "rem";
+        } else {
+            footprint.style.margin = "1rem " + rand + "rem 1rem 1rem";
+        }
+        footprint.classList.add("fade");
+        elem.appendChild(footprint);
+    }
 }

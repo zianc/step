@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zian's Portfolio</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtX-9HP1-CGcy7kmFgTQ1M0GRSMJ0SYls"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="location.css">
+</head>
+<body>
+    <div id="location-wrapper">
+        <h1>Places I Call Home</h1>
+        <div class="location-stop fade">
+            <h2>Los Angeles, California</h2>
+            <div id="los-angeles-map"></div>
+            <script>createMap("los-angeles-map", 34.06999972, -118.439789907);</script>
+            <p>
+                My home base for the next two years is in Los Angeles, California,
+                where I attend UCLA. Although Los Angeles can seem glamerous, our 
+                school is located in Westwood and is neither a part of the hustle
+                and bustle of the big city nor a part of the wealthy neighborhood
+                of Beverly Hills. That being said, the area is still very nice.
+            </p>
+        </div>
+        <div id="footprint-LA" class="footprints"></div>
+        <script>createFootprints("footprint-LA");</script>
+        <div class="location-stop fade">
+            <h2>Los Gatos, California</h2>
+            <div id="los-gatos-map"></div>
+            <script>createMap("los-gatos-map", 37.237339, -121.966649)</script>
+            <p>
+                I've lived in Los Gatos, California for about 10 years. I went
+                to elementary, middle, and high school year, ultimately capping
+                off my years at Los Gatos High School. The town is small but
+                has a cozy downtown area and a fantastic park.
+            </p>
+        </div>
+        <div id="footprint-LG" class="footprints"></div>
+        <script>createFootprints("footprint-LG");</script>
+        <div class="location-stop fade">
+            <h2>Toronto, Canada</h2>
+            <div id="toronto-map"></div>
+            <script>createMap("toronto-map", 43.664478, -79.400540);</script>
+            <p>
+                I moved to Toronto when I was edging near a year old. I 
+                don't quite remember that much since I moved away when I was 
+                seven, but I do distinctly remember the tons of snow and our 
+                little apartment in the city. My dad spent his time getting his
+                PhD at the University of Toronto.
+            </p>
+        </div>
+        <div id="footprint-toronto" class="footprints"></div>
+        <script>createFootprints("footprint-toronto");</script>
+        <div class="location-stop fade">
+            <h2>Putian, China</h2>
+            <div id="putian-map"></div>
+            <script>createMap("putian-map", 25.43944, 119.01028);</script>
+            <p>
+                I was born in Putian, China--a little rural village along the
+                southern coast of the continent. Although I didn't live here,
+                I'm fortunate enough to be able to go back home and visit from
+                time to time. My grandmother always makes sure to whisk up a 
+                lot of seafood for me to eat, ensuring that I always leave the 
+                country with a couple extra pounds on my body...
+            </p>
+        </div>
+    </div>
+</body>
+</html>
