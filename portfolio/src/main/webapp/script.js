@@ -39,7 +39,7 @@ $(window).on("load", function() {
  * Retrieve comments from database. Set limit on the number of comments
  * retrieved through query parameter.
  */
-function getComments(limit) {
+function addCommentsToDOM(limit) {
     fetch("/data?limit=".concat(limit))
     .then(response => response.json())
     .then((comments) => {

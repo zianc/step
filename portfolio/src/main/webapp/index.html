@@ -7,7 +7,7 @@
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
-    <body onload="getComments(5)">
+    <body onload="addCommentsToDOM(5)">
         <div id="wrapper">
             <div id="content">
                 <div id="header">
@@ -16,7 +16,7 @@
                         <a href="mailto:zianchen774@gmail.com" target="_blank">
                             <img class="icon" src="./images/mail_icon.png" 
                                  alt="Mail icon"/>
-                            </a>
+                        </a>
                         <a href="http://github.com/zianc">
                             <img class="icon" src="./images/github_icon.png" 
                                  alt="Github icon"/>
@@ -126,7 +126,7 @@
                         <hr/>
                         <div id="msg-container"></div>
                         <hr/>
-                        <input onchange="getComments(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
+                        <input onchange="addCommentsToDOM(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.gson.Gson;
+import com.google.sps.data.CONSTANT;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/*
+ * Adds comments to database.
+ */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     @Override
@@ -47,7 +50,7 @@ public class DataServlet extends HttpServlet {
                 break;
             } 
             counter++;
-            String line = (String)entity.getProperty("comment");
+            String line = (String)entity.getProperty(CONSTANT.db_comment_prop);
             comments.add(line);
         }
 
@@ -58,9 +61,9 @@ public class DataServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String comment = request.getParameter("comment");
-        Entity taskEntity = new Entity("Comments");
-        taskEntity.setProperty("comment", comment);
+        String comment = request.getParameter(CONSTANT.db_comment_prop);
+        Entity taskEntity = new Entity(CONSTANT.db_title);
+        taskEntity.setProperty(CONSTANT.db_comment_prop, comment);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(taskEntity);
         
