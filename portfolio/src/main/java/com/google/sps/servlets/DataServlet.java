@@ -30,11 +30,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*
- * Adds comments to database.
- */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+    /* 
+     * Retrieve comments from Datastore and add to DOM.
+     * Returns comments to client in JSON form. 
+     */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {        
         int limit = Integer.parseInt(request.getParameter("limit"));
@@ -59,6 +60,9 @@ public class DataServlet extends HttpServlet {
         response.getWriter().println(gson.toJson(comments));
     }
 
+    /*
+    * Adds comments to database.
+    */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String comment = request.getParameter(Constants.COMMENTS_PROPERTY);
