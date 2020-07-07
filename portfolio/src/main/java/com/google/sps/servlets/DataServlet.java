@@ -33,7 +33,7 @@ import java.util.List;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     /* 
-     * Retrieve comments from Datastore and add to DOM.
+     * Retrieves comments from Datastore and adds HTML elements to DOM.
      * Returns comments to client in JSON form. 
      */
     @Override
@@ -61,7 +61,7 @@ public class DataServlet extends HttpServlet {
     }
 
     /*
-    * Adds comments to database.
+    * Adds comments to Datastore.
     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
