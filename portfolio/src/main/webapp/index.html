@@ -4,9 +4,10 @@
         <meta charset="UTF-8">
         <title>My Portfolio</title>
         <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
-    <body>
+    <body onload="addCommentsToDOM(5)">
         <div id="wrapper">
             <div id="content">
                 <div id="header">
@@ -39,11 +40,11 @@
                             arguably more importantly, how to deal with failure, 
                             learn the value of criticism, and rely not only on 
                             myself but those around me. Keep scrolling to track a 
-                            few stops along the way! 
+                            few stops along the way!
                         </p>
                     </div>
                     <img class="path-connecter" src="./images/white_path.svg"/>
-                    <div class="path-stop">
+                    <div class="path-stop fade">
                         <p class="path-stop-desc">
                             SWE Dev was the first organization I joined and the 
                             one that taught me how to learn from the bottom up. 
@@ -54,8 +55,8 @@
                         </p>
                         <img id="path-stop-img-swedev" src="./images/swe_dev.png"/>
                     </div>
-                    <img class="path-connecter" src="./images/white_path.svg"/>
-                    <div class="path-stop">
+                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <div class="path-stop fade">
                         <img id="path-stop-img-lahacks" src="./images/lahacks.png"/>
                         <p class="path-stop-desc">
                             I worked on the Tech Team to assist in hosting one 
@@ -70,8 +71,8 @@
                             the position of Tech Director. 
                         </p>
                     </div>
-                    <img class="path-connecter" src="./images/white_path.svg"/>
-                    <div class="path-stop">
+                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <div class="path-stop fade">
                         <p class="path-stop-desc">
                             I spent a quarter at UCLA working on a Creative Labs 
                             project called Pinstagrad, which aimed to help improve 
@@ -85,8 +86,23 @@
                         </p>
                         <img id="path-stop-img-creativelabs" src="./images/creativelabs.png"/>
                     </div>
-                    <img class="path-connecter" src="./images/white_path.svg"/>
-                    <div id="footer">
+                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <div class="path-stop fade">
+                        <img id="path-stop-img-atac" src="./images/atac.png"/>
+                        <p class="path-stop-desc">
+                            Last summer, I was fortunate enough to have the 
+                            opportunity to intern for ATAC, an aviation company, 
+                            working on two NASA SBIR Phase II projects as well as 
+                            a data visualization tool for airplane density. The first
+                            NASA SBIR project dealt primarily with improving accuracy
+                            on an airplane delay prediction tool. The second was an
+                            exploration into XAI (Explainable Artificial Intelligence),
+                            in which I wrote deep neural networks and helped configure
+                            data for a Bayesian classifier.
+                        </p>
+                    </div>
+                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <div class="footer fade">
                         <h2 id="outro">...and here we are today.</h2>
                         <p id="footer-desc"> 
                             I am currently a STEP intern at Google and Tech 
@@ -97,6 +113,20 @@
                             informations in my Github and LinkedIn, linked above. 
                             Feel free to drop me a message!
                         </p>
+                    </div>
+                </div>
+                <div class="msg"> 
+                    <form class="fade" id="comment-form" action="/data" method="POST">
+                        <textarea id="comment-form-box" name="comment" placeholder="Leave a comment!"></textarea>
+                        <br/><br/>
+                        <input id="comment-form-input" type="submit" />
+                    </form>
+                    <div id="msg-footer">
+                        <h2>Previous Comments</h2>
+                        <hr/>
+                        <div id="msg-container"></div>
+                        <hr/>
+                        <input onchange="addCommentsToDOM(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
                     </div>
                 </div>
             </div>

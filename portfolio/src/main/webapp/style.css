@@ -8,6 +8,34 @@ body {
     background: black;
 }
 
+p {
+    font-size: 2rem;
+}
+
+textarea {
+    padding: 1rem;
+}
+
+button {
+    padding: 1rem;
+    background: white;
+    font-family: monospace;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+}
+
+hr {
+    color: white;
+    width: 100%;
+}
+
+input {
+    font-family: monospace;
+}
+
 .wrapper {
     justify-content: center;
     align-items: center;
@@ -68,7 +96,7 @@ body {
 }
 
 #path-stop-img-lahacks {
-    max-height: 40rem;
+    max-height: 42rem;
     border-radius: 1.2rem;
     margin-right: 3rem;
 }
@@ -79,19 +107,26 @@ body {
     margin-left: 3rem;
 }
 
+#path-stop-img-atac {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
 .path-stop-desc {
-    font-size: 2rem;
     max-width: 40rem;
     padding: 1rem;
 }
 
 .path-connecter {
-    max-height: 40rem;
+    max-height: 20rem;
 }
 
-#footer {
+.footer {
     max-width: 100rem;
-    align-self: center;
+    align-self: center;    
+    padding-left: 15rem;
+    padding-right: 15rem;
 }
 
 #outro {
@@ -101,7 +136,53 @@ body {
 }
 
 #footer-desc {
-    font-size: 2.5rem;
+    font-size: 2rem;
     text-align: center;
     align-self: center;
+}
+
+.fade {
+    opacity: 1;
+}
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+#comment-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%
+}
+
+#comment-form-box {
+    width: 40%;
+    height: 20rem;
+}
+
+#msg-footer {
+    border-style: solid;
+    border-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rem;
+    width: 70%;
+}
+
+#msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#quantity {
+    margin: 2rem 0 3rem 0;
+    border-radius: 0.5rem;
 }
