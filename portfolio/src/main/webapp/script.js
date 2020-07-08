@@ -66,23 +66,29 @@ function createMap(map_name, latitude, longitude) {
 }
 
 /*
- * Creates set of footprints from one div to the next.
+ * Append set of footprints to the DOM, with direction pointing top to bottom,
+ * fading in on scroll, to emulate the experience of walking from a location
+ * at the top of the screen to the bottom. Takes the ID of the destination 
+ * location as an argument.
  */
-function createFootprints(elem_name) {
+function createFootprints(locationID) {
     const num_footprints = 6;
-    const elem = document.getElementById(elem_name);
+    const location = document.getElementById(locationID);
     for (let i = 0; i < num_footprints; i++) {
         const footprint = document.createElement("img");
         footprint.src = "images/footprint.png";
         const direction = (i % 2 == 0) ? "right" : "left";
         footprint.classList.add("footprint-" + direction);
+
+        /* Vary width between steps for a more natural appearance. */
         const rand = Math.floor(Math.random * (3) + 2);
         if (direction.localeCompare("right") == 0) {
             footprint.style.margin = "1rem 1rem 1rem " + rand + "rem";
         } else {
             footprint.style.margin = "1rem " + rand + "rem 1rem 1rem";
         }
+        
         footprint.classList.add("fade");
-        elem.appendChild(footprint);
+        location.appendChild(footprint);
     }
 }
