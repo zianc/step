@@ -38,7 +38,7 @@ public class DataServlet extends HttpServlet {
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {        
-        int limit = Integer.parseInt(request.getParameter(Constant.COMMENTS_LIMIT));
+        int limit = Integer.parseInt(request.getParameter(Constants.COMMENTS_LIMIT));
         Query query = new Query(Constants.COMMENTS_KIND);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         PreparedQuery results = datastore.prepare(query);

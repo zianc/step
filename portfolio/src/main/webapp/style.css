@@ -66,6 +66,157 @@ input {
 }
 
 .icon {
+    max-height: 5rem;
+    margin: 0 1rem 0 1rem;
+}
+
+#path {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6rem;
+}
+
+.path-stop {
+    display: flex;
+    align-self: center;
+    align-content: center;
+    padding: 10rem;
+}
+
+#path-stop-img-me {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
+#path-stop-img-swedev {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-left: 3rem;
+}
+
+#path-stop-img-lahacks {
+    max-height: 42rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
+#path-stop-img-creativelabs {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-left: 3rem;
+}
+
+#path-stop-img-atac {
+    max-height: 40rem;
+    border-radius: 1.2rem;
+    margin-right: 3rem;
+}
+
+.path-stop-desc {
+    max-width: 40rem;
+    padding: 1rem;
+}
+
+.path-connecter {
+    max-height: 20rem;
+}
+
+.footer {
+    max-width: 100rem;
+    align-self: center;    
+    padding-left: 15rem;
+    padding-right: 15rem;
+}
+
+#outro {
+    font-size: 5rem;
+    text-align: center;
+    align-self: center;
+}
+
+#footer-desc {
+    font-size: 2rem;
+    text-align: center;
+    align-self: center;
+}
+
+.fade {
+    opacity: 1;
+}
+
+.msg {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    align-items: center;
+    padding: 2rem;
+}
+
+#comment-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%
+}
+
+#comment-form-box {
+    width: 40%;
+    height: 20rem;
+}
+
+#msg-footer {
+    border-style: solid;
+    border-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rem;
+    width: 70%;
+}
+
+#msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#quantity {
+    margin: 2rem 0 3rem 0;
+    border-radius: 0.5rem;
+}
+
+.wrapper {
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+}
+
+#intro {
+    font-size: 10rem;
+    align-self: center;
+    margin-top: 15rem;
+}
+
+#external-links {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.icon {
     max-width: 5rem;
     margin: 0.5rem;
 }
@@ -157,7 +308,7 @@ input {
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 100%
+    width: 100%;
 }
 
 #comment-form-box {
