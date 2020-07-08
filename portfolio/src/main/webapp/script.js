@@ -66,7 +66,7 @@ function createMap(map_name, latitude, longitude) {
 }
 
 /*
- * Append set of footprints to the DOM, with direction pointing top to bottom,
+ * Append a set of footprints to the DOM, with direction pointing top to bottom,
  * fading in on scroll, to emulate the experience of walking from a location
  * at the top of the screen to the bottom. Takes the ID of the destination 
  * location as an argument.
