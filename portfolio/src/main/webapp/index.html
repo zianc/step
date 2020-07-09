@@ -7,7 +7,7 @@
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="script.js"></script>
     </head>
-    <body onload="addCommentsToDOM(5)">
+    <body>
         <div id="wrapper">
             <div id="content">
                 <div id="header">
@@ -75,7 +75,7 @@
                             the position of Tech Director. 
                         </p>
                     </div>
-                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <img class="path-connecter" src="./images/white_path.svg"/>
                     <div class="path-stop fade">
                         <p class="path-stop-desc">
                             I spent a quarter at UCLA working on a Creative Labs 
@@ -129,8 +129,16 @@
                         <h2>Previous Comments</h2>
                         <hr/>
                         <div id="msg-container"></div>
+                        <script>addCommentsToDOM(5)</script>
                         <hr/>
                         <input onchange="addCommentsToDOM(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
+                        <div id="login-btn" class="login-logout-btn">
+                            <button id="login" name="Login button">LOGIN</button>
+                        </div>
+                        <div id="logout-btn" class="login-logout-btn">
+                            <button id="logout" name="Logout button">LOGOUT</button>
+                        </div>
+                        <script>getLoginStatus()</script>
                     </div>
                 </div>
             </div>
