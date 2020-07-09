@@ -26,37 +26,32 @@ function getLoginStatus() {
         const msg_form = document.getElementById('msg-form');
         const comment_form = document.getElementById('comment-form');
         const quantity_input = document.getElementById('quantity');
-        let button = document.createElement('button');
-        button_area.innerHTML = '';
+        const login_btn = document.getElementById('login-btn');
+        const logout_btn = document.getElementById('logout-btn');
  
         if (result.loggedIn == 1) {
             /* Allow logged in users to submit comments and change number of comments. */
             comment_form.style.display = 'flex';
             quantity_input.style.display = 'block';
  
-            /* Create button for logging in and out. */
-            button.setAttribute('id', 'logout');
-            button.innerHTML = 'LOGOUT';
-            button.addEventListener('click', () => {
+            /* Display logout button. */
+            logout_btn.addEventListener('click', () => {
                 window.location.href = result.URL;
             });
-            button.style.padding = '0.5rem';
-            button.style.margin = '1rem';
-            button_area.appendChild(button);
+            logout_btn.style.display = 'block';
+            login_btn.style.display = 'none';
+            
         } else {
-            /* If not logged in, hide comment submission form. */
+            /* If not logged in, hide comment submission form and comment restriction option. */
             comment_form.style.display = 'none';
             quantity_input.style.display = 'none';
  
-            /* Create a login button that redirects to login page when clicked. */
-            button.setAttribute('id', 'login');
-            button.innerHTML = 'LOGIN';
-            button.addEventListener('click', () => {
+            /* Display login button. */
+            login_btn.addEventListener('click', () => {
                 window.location.href = result.URL;
             });
-            button_area.style.padding = '0.5rem';
-            button.style.margin = '1rem';
-            button_area.appendChild(button);
+            login_btn.style.display = 'block';
+            logout_btn.style.display = 'none';
         }
     });
 }
@@ -88,7 +83,7 @@ $(window).on('load', function() {
  * Retrieve comments from database. Set limit on the number of comments
  * retrieved through query parameter.
  */
-function getComments(limit) {
+function addCommentsToDOM(limit) {
     if (limit == '')
         return;
     fetch('/data?limit='.concat(limit))

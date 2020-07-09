@@ -4,7 +4,7 @@ body {
 }
 
 button {
-    padding: 2rem;
+    padding: 1rem;
     background: white;
     font-family: monospace;
     border: none;
@@ -75,6 +75,11 @@ textarea {
     margin: 0 1rem 0 1rem;
 }
 
+.login-logout-btn {
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
 .msg {
     padding: 2rem;
 }
@@ -114,7 +119,7 @@ textarea {
 }
 
 #comment-form {
-    width: 100%
+    width: 100%;
 }
 
 #comment-form-box {
