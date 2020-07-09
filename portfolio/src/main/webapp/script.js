@@ -46,7 +46,7 @@ function getLoginStatus() {
         } else {
             /* If not logged in, hide comment submission form. */
             comment_form.style.display = 'none';
-            quantity_input.sytle.display = 'none';
+            quantity_input.style.display = 'none';
  
             /* Create a login button that redirects to login page when clicked. */
             button.setAttribute('id', 'login');
