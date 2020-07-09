@@ -36,24 +36,24 @@
                         <img id="path-stop-img-me" src="./images/profile_picture.jpg" 
                             alt="profile_picture"/>
                         <p class="path-stop-desc">
-                            Thanks for dropping by! My name is Zian Chen, a 
-                            soon-to-be third year student at UCLA, working to 
-                            get a Bachelor's in Computer Science. My path to 
-                            where I am now has not been easy, but along the way 
-                            I've picked up multiple different skills and, 
+                            Thanks for dropping by! My name is 
+                            Zian Chen, a soon-to-be third year student at UCLA, 
+                            working to get a Bachelor's in Computer Science. My 
+                            path to where I am now has not been easy, but along 
+                            the way I've picked up multiple different skills and, 
                             arguably more importantly, how to deal with failure, 
                             learn the value of criticism, and rely not only on 
                             myself but those around me. Keep scrolling to track a 
-                            few stops along the way!
+                            few stops along the way! 
                         </p>
                     </div>
                     <img class="path-connecter" src="./images/white_path.svg"/>
                     <div class="path-stop fade">
                         <p class="path-stop-desc">
-                            SWE Dev was the first organization I joined and the 
-                            one that taught me how to learn from the bottom up. 
-                            In order to build our club's Event Portal, I worked 
-                            on both the front and backend, primarily learning 
+                            SWE Dev was the first organization 
+                            I joined and the one that taught me how to learn from the 
+                            bottom up. In order to build our club's Event Portal, I 
+                            worked on both the front and backend, primarily learning 
                             React and PostgreSQL to do so. I deal with a lot of 
                             categorical data that we use to improve useability.
                         </p>
@@ -63,30 +63,29 @@
                     <div class="path-stop fade">
                         <img id="path-stop-img-lahacks" src="./images/lahacks.png"/>
                         <p class="path-stop-desc">
-                            I worked on the Tech Team to assist in hosting one 
-                            of the largest hackathons in the nation; in fact, 
-                            our virtual hackathon this year attracted over 1,000 
-                            participants. My contributions included designing 
-                            and implementing the entire frontend for our website 
-                            and live site in React, working to learn and develop 
-                            the large code base and backend (written in Go and 
-                            using PostgreSQL), and handle the technical transition 
-                            to a virtual format. Next year, I will be taking on 
-                            the position of Tech Director. 
+                            I worked on the Tech Team to assist 
+                            in hosting one of the largest hackathons in the nation; 
+                            in fact, our virtual hackathon this year attracted over 
+                            1,000 participants. My contributions included designing 
+                            and implementing the entire frontend for our website and 
+                            live site in React, working to learn and develop the large 
+                            code base and backend (written in Go and using PostgreSQL), 
+                            and handle the technical transition to a virtual format. Next 
+                            year, I will be taking on the position of Tech Director. 
                         </p>
                     </div>
-                    <img class="path-connecter fade" src="./images/white_path.svg"/>
+                    <img class="path-connecter" src="./images/white_path.svg"/>
                     <div class="path-stop fade">
                         <p class="path-stop-desc">
-                            I spent a quarter at UCLA working on a Creative Labs 
-                            project called Pinstagrad, which aimed to help improve 
-                            rising seniors' graduation photo experience. I worked 
-                            primarily as a backend dev, using Go and Firebase to 
-                            store images. I also briefly dabbled in the frontend 
-                            towards the end of the quarter, which used React. Not 
-                            only did I pick up those skills, I also learned quite a 
-                            bit about working in a small team and picked up tips on 
-                            how to lead one successfully.
+                            I spent a quarter at UCLA working on 
+                            a Creative Labs project called Pinstagrad, which aimed to 
+                            help improve rising seniors' graduation photo experience. 
+                            I worked primarily as a backend dev, using Go and Firebase 
+                            to store images. I also briefly dabbled in the frontend 
+                            towards the end of the quarter, which used React. Not only 
+                            did I pick up those skills, I also learned quite a bit about 
+                            working in a small team and picked up tips on how to lead 
+                            one successfully.
                         </p>
                         <img id="path-stop-img-creativelabs" src="./images/creativelabs.png"/>
                     </div>
@@ -109,26 +108,30 @@
                     <div class="footer fade">
                         <h2 id="outro">...and here we are today.</h2>
                         <p id="footer-desc"> 
-                            I am currently a STEP intern at Google and Tech 
-                            Director for LA Hacks. I am still learning, still 
-                            working to write better and smarter code, and still 
-                            attempting to shape and develop my own creative 
-                            ideas. You can find more of my projects and 
-                            informations in my Github and LinkedIn, linked above. 
-                            Feel free to drop me a message!
+                            I am currently a STEP intern at Google and 
+                            Tech Director for LA Hacks. I am still learning, still working 
+                            to write better and smarter code, and still attempting to shape 
+                            and develop my own creative ideas. You can find more of my 
+                            projects and informations in my Github and LinkedIn, linked 
+                            above. Feel free to drop me a message!
                         </p>
                     </div>
                 </div>
-                <div class="msg">
-                    <div id="msg-form"></div>
+                <div class="msg"> 
+                    <form class="fade" id="comment-form" action="/data" method="POST">
+                        <textarea id="comment-form-box" name="comment" placeholder="Leave a comment!"></textarea>
+                        <br/><br/>
+                        <input id="comment-form-input" type="submit" />
+                    </form>
                     <div id="msg-footer">
                         <h2>Previous Comments</h2>
                         <hr/>
                         <div id="msg-container"></div>
-                        <script>addCommentsToDOM(5)</script>
+                        <script>getComments(5)</script>
                         <hr/>
+                        <input onchange="addCommentsToDOM(this.value)" type="number" id="quantity" name="limit" min="0" placeholder="Number of comments"/>
                         <div id="button-area"></div>
-                        <script>getLogin()</script>
+                        <script>getLoginStatus()</script>
                     </div>
                 </div>
             </div>
