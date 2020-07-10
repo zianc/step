@@ -72,7 +72,7 @@ public final class FindMeetingQuery {
 
     /**
      * The query function returns a set of TimeRanges where a potential meeting,
-     * specified as a MeetingRequest argument, can take place among a full day of 
+     * specified as a MeetingRequest argument, can take place among a day of 
      * Events. The algorithm runs in O(n^2) time since we have to sort the events
      * first, requiring O(nlogn) time, and then iterate through each event and 
      * find conflicting attendees, requiring O(n^2) time.
@@ -87,7 +87,7 @@ public final class FindMeetingQuery {
         /* Check validity of arguments. */
         long duration = request.getDuration();
         if (duration < 0 || duration >= TimeRange.END_OF_DAY) {
-            return meetingTimes; // return empty if no duration or if duration is too long
+            return meetingTimes; // return empty if invalid duration
         }
 
         if (events.size() == 0 || allAttendees.size() == 0) {
@@ -102,7 +102,6 @@ public final class FindMeetingQuery {
         }
 
         /* Otherwise, simply find appropriate meeting times for mandatory attendees. */
-        meetingTimes = findMeetingTimes(events, mandatoryAttendees, eventsByEndTime, eventsByStartTime, duration);
-        return meetingTimes;
+        return findMeetingTimes(events, mandatoryAttendees, eventsByEndTime, eventsByStartTime, duration);
     }   
 }
