@@ -21,14 +21,19 @@ import java.util.HashSet;
 import java.util.List;
 
 public final class FindMeetingQuery {
-    /*
+    /**
      * Given a set of events and a list of attendees, find and return the set of
      * valid meeting times.
      */
     public Collection<TimeRange> findMeetingTimes (
-        Collection<Event> events,    Collection<String> attendees,  
-        List<Event> eventsByEndTime, List<Event> eventsByStartTime, 
+        Collection<Event> events,    Collection<String> attendees,
         long duration) {
+
+        /* Sort events with latest end times coming first. */
+        List<Event> eventsByEndTime = new ArrayList<Event>(events);
+        List<Event> eventsByStartTime = new ArrayList<Event>(events);
+        Collections.sort(eventsByEndTime, Event.ORDER_BY_END_DESCENDING);
+        Collections.sort(eventsByStartTime, Event.ORDER_BY_START_ASCENDING);
 
         Collection<TimeRange> meetingTimes = new ArrayList<TimeRange>();
         int prevEndTime = TimeRange.END_OF_DAY + 1;
@@ -39,10 +44,12 @@ public final class FindMeetingQuery {
             Collection<String> eventAttendees = event.getAttendees();
             conflictAttendees.retainAll(event.getAttendees());
 
-            /* For events that have conflicting attendees, add the time range 
-            spanning from the last recorded end time to the current event's end 
-            time to our output set if the duration fits within it. Move last end 
-            time to current event's start time for the next event. */
+            /**
+             * For events that have conflicting attendees, add the time range 
+             * spanning from the last recorded end time to the current event's end 
+             * time to our output set if the duration fits within it. Move last end 
+             * time to current event's start time for the next event. 
+             */
             if (conflictAttendees.size() > 0) {
                 TimeRange freeTime = TimeRange.fromStartEnd(event.getWhen().end(), prevEndTime, false);
                 if (duration <= freeTime.duration()) {
@@ -63,7 +70,7 @@ public final class FindMeetingQuery {
         return meetingTimesList;
     }
 
-    /*
+    /**
      * The query function returns a set of TimeRanges where a potential meeting,
      * specified as a MeetingRequest argument, can take place among a full day of 
      * Events. The algorithm runs in O(n^2) time since we have to sort the events
@@ -87,12 +94,6 @@ public final class FindMeetingQuery {
             meetingTimes.add(TimeRange.WHOLE_DAY);
             return meetingTimes; // no attendees or events
         }
-
-        /* Sort events with latest end times coming first. */
-        List<Event> eventsByEndTime = new ArrayList<Event>(events);
-        List<Event> eventsByStartTime = new ArrayList<Event>(events);
-        Collections.sort(eventsByEndTime, Event.ORDER_BY_END);
-        Collections.sort(eventsByStartTime, Event.ORDER_BY_START);
 
         /* First check if there exist meeting times with optional attendees. */
         meetingTimes = findMeetingTimes(events, allAttendees, eventsByEndTime, eventsByStartTime, duration);
