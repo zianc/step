@@ -26,7 +26,7 @@ public final class FindMeetingQuery {
      * to attend the meeting, and a set of events with their own respective 
      * set of attendees, find and return the set of valid meeting times. 
      * Valid meeting times are time ranges such that the meeting time is 
-     * greater than the given duration and mandatory attendees are available 
+     * greater than the given duration and all attendees are available 
      * during that given time. 
      */
     public Collection<TimeRange> findMeetingTimes (
@@ -42,7 +42,8 @@ public final class FindMeetingQuery {
 
         Collection<TimeRange> meetingTimes = new ArrayList<TimeRange>();
 
-        /* To find valid meeting times, we use a temporary variable prevEndTime
+        /**
+         * To find valid meeting times, we use a temporary variable prevEndTime
          * that is initially set to the end of the day. Since we sort events by 
          * their end time in descending order, we effectively travel backwards.
          * Starting with the latest ending event, check if the event's attendees
