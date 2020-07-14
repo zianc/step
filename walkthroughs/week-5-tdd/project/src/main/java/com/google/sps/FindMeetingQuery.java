@@ -22,11 +22,16 @@ import java.util.List;
 
 public final class FindMeetingQuery {
     /**
-     * Given a set of events and a list of attendees, find and return the set of
-     * valid meeting times.
+     * Given the duration for a meeting, a set of attendees are required
+     * to attend the meeting, and a set of events with their own respective 
+     * set of attendees, find and return the set of valid meeting times. 
+     * Valid meeting times are time ranges such that the meeting time is 
+     * greater than the given duration and mandatory attendees are available 
+     * during that given time. 
      */
     public Collection<TimeRange> findMeetingTimes (
-        Collection<Event> events,    Collection<String> attendees,
+        Collection<Event> events,    
+        Collection<String> attendees,
         long duration) {
 
         /* Sort events with latest end times coming first. */
@@ -36,20 +41,24 @@ public final class FindMeetingQuery {
         Collections.sort(eventsByStartTime, Event.ORDER_BY_START_ASCENDING);
 
         Collection<TimeRange> meetingTimes = new ArrayList<TimeRange>();
+
+        /* To find valid meeting times, we use a temporary variable prevEndTime
+         * that is initially set to the end of the day. Since we sort events by 
+         * their end time in descending order, we effectively travel backwards.
+         * Starting with the latest ending event, check if the event's attendees
+         * overlap with the meeting's required attendees. If they do, then we 
+         * cap off our current time range, which spans [event end time, prevEndTime),
+         * and add it to the valid meeting times. Set prevEndTime to the start
+         * of the conflicting event and continue on to the next event. If there 
+         * are no intersecting attendees, simply move on to next event.
+         */
         int prevEndTime = TimeRange.END_OF_DAY + 1;
-        
         for (Event event : eventsByEndTime) {
-            /* Find attendees required to be at meeting also attending event. */
-            Collection<String> conflictAttendees = new HashSet<>(attendees);
+            /* Find attendees required to be at meeting that are also attending event. */
             Collection<String> eventAttendees = event.getAttendees();
+            Collection<String> conflictAttendees = new HashSet<>(attendees);
             conflictAttendees.retainAll(event.getAttendees());
 
-            /**
-             * For events that have conflicting attendees, add the time range 
-             * spanning from the last recorded end time to the current event's end 
-             * time to our output set if the duration fits within it. Move last end 
-             * time to current event's start time for the next event. 
-             */
             if (conflictAttendees.size() > 0) {
                 TimeRange freeTime = TimeRange.fromStartEnd(event.getWhen().end(), prevEndTime, false);
                 if (duration <= freeTime.duration()) {
@@ -71,11 +80,15 @@ public final class FindMeetingQuery {
     }
 
     /**
-     * The query function returns a set of TimeRanges where a potential meeting,
-     * specified as a MeetingRequest argument, can take place among a day of 
-     * Events. The algorithm runs in O(n^2) time since we have to sort the events
-     * first, requiring O(nlogn) time, and then iterate through each event and 
-     * find conflicting attendees, requiring O(n^2) time.
+     * The query function returns a set of non-overlapping TimeRanges where a 
+     * potential meeting, specified as a MeetingRequest argument, can take place 
+     * among a day of Events. A MeetingRequest has a specified duration and set 
+     * of attendees, which can be broken down into a set of mandatory attendees, 
+     * which must attend, and set of optional attendees, that are preferred to 
+     * attend but might not necessarily have to. The algorithm runs in O(n^2) 
+     * time since we have to sort the events first, requiring O(nlogn) time, and 
+     * then iterate through each event and find conflicting attendees, requiring 
+     * O(n^2) time.
      */
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
         Collection<TimeRange> meetingTimes = new ArrayList<TimeRange>();
@@ -96,12 +109,12 @@ public final class FindMeetingQuery {
         }
 
         /* First check if there exist meeting times with optional attendees. */
-        meetingTimes = findMeetingTimes(events, allAttendees, eventsByEndTime, eventsByStartTime, duration);
+        meetingTimes = findMeetingTimes(events, allAttendees, duration);
         if (meetingTimes.size() > 0) {
             return meetingTimes;
         }
 
         /* Otherwise, simply find appropriate meeting times for mandatory attendees. */
-        return findMeetingTimes(events, mandatoryAttendees, eventsByEndTime, eventsByStartTime, duration);
+        return findMeetingTimes(events, mandatoryAttendees, duration);
     }   
 }
