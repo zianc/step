@@ -29,7 +29,7 @@ public final class FindMeetingQuery {
      * greater than the given duration and all attendees are available 
      * during that given time. 
      */
-    public Collection<TimeRange> findMeetingTimes (
+    public Collection<TimeRange> findMeetingTimes(
         Collection<Event> events,    
         Collection<String> attendees,
         long duration) {
@@ -49,9 +49,10 @@ public final class FindMeetingQuery {
          * Starting with the latest ending event, check if the event's attendees
          * overlap with the meeting's required attendees. If they do, then we 
          * cap off our current time range, which spans [event end time, prevEndTime),
-         * and add it to the valid meeting times. Set prevEndTime to the start
-         * of the conflicting event and continue on to the next event. If there 
-         * are no intersecting attendees, simply move on to next event.
+         * and add it to the valid meeting times if it is longer than the given
+         * duration. We then set prevEndTime to the start of the conflicting event 
+         * and continue on to the next event. If there are no intersecting attendees, 
+         * simply move on to next event.
          */
         int prevEndTime = TimeRange.END_OF_DAY + 1;
         for (Event event : eventsByEndTime) {
@@ -89,7 +90,7 @@ public final class FindMeetingQuery {
      * attend but might not necessarily have to. The algorithm runs in O(n^2) 
      * time since we have to sort the events first, requiring O(nlogn) time, and 
      * then iterate through each event and find conflicting attendees, requiring 
-     * O(n^2) time.
+     * O(nm) time, where m is the number of attendees.
      */
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
         Collection<TimeRange> meetingTimes = new ArrayList<TimeRange>();
