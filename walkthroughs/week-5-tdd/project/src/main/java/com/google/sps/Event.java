@@ -30,16 +30,6 @@ public final class Event {
   private final Set<String> attendees = new HashSet<>();
 
   /**
-   * A comparator for sorting Events by their start time in ascending order.
-   */
-  public static final Comparator<Event> ORDER_BY_START_ASCENDING = new Comparator<Event>() {
-    @Override
-    public int compare(Event a, Event b) {
-      return a.when.start() - b.when.start();
-    }
-  };
-
-  /**
    * A comparator for sorting Events by their end time in descending order.
    */
   public static final Comparator<Event> ORDER_BY_END_DESCENDING = new Comparator<Event>() {
