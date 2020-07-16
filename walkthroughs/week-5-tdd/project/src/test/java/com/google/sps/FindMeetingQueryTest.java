@@ -49,12 +49,14 @@ public final class FindMeetingQueryTest {
   private static final int TIME_0400PM = TimeRange.getTimeInMinutes(16, 0);
   private static final int TIME_0430PM = TimeRange.getTimeInMinutes(16, 30);
  
+  private static final int DURATION_NEGATIVE = -1;
   private static final int DURATION_15_MINUTES = 15;
   private static final int DURATION_30_MINUTES = 30;
   private static final int DURATION_60_MINUTES = 60;
   private static final int DURATION_90_MINUTES = 90;
   private static final int DURATION_1_HOUR = 60;
   private static final int DURATION_2_HOUR = 120;
+  private static final int DURATION_WHOLE_DAY = 1440;
  
   private FindMeetingQuery query;
  
@@ -126,6 +128,39 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
  
     Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void wholeDayEvent() {
+      // Have no events and a meeting that takes the entire day. Should return one TimeRange
+      // that spans the entire day.
+      //
+      // Events:  
+      // Day:     |---------------------|
+      // Options: |---------------------|
+
+      Collection<Event> events = Arrays.asList();
+
+      MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_WHOLE_DAY);
+
+      Collection<TimeRange> actual = query.query(events, request);
+      Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
+
+      Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void negativeDuration() {
+      // Have a meeting request with negative duration. Should return no results.
+
+      Collection<Event> events = Arrays.asList();
+
+      MeetingRequest request = new MeetingRequest(Arrays.asList(), DURATION_NEGATIVE);
+
+      Collection<TimeRange> actual = query.query(events, request);
+      Collection<TimeRange> expected = Arrays.asList();
+
+      Assert.assertEquals(expected, actual);
   }
  
   @Test

@@ -112,7 +112,7 @@ public final class FindMeetingQuery {
         allAttendees.addAll(optionalAttendees);
         
         long duration = request.getDuration();
-        if (duration < 0 || duration > TimeRange.END_OF_DAY) {
+        if (duration < 0 || duration > TimeRange.WHOLE_DAY.duration()) {
             return meetingTimes; // return empty if invalid duration
         }
 
