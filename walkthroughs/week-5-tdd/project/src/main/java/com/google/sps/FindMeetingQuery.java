@@ -33,11 +33,12 @@ public final class FindMeetingQuery {
      * first and then iterate through each event, effectively traveling 
      * backwards. For each event, we check if the event's attendees overlap 
      * with the meeting's required attendees. If they do, then we cap off our 
-     * current time range, which spans [event end time, prevEndTime), and add 
+     * current time range, which represents the range for which all meeting
+     * attendees are available and spans [event end time, prevEndTime). We add 
      * it to the valid meeting times if it is longer than the given duration. 
      * We then set prevEndTime to the start of the conflicting event and 
      * continue on to the next event. If there are no intersecting attendees, 
-     * move on to the next event and repeat the process.
+     * we move on to the next event and repeat the process.
      *
      * Alternative approaches include sorting by start time, which will yield
      * the same runtime but reduce the need to reverse the resulting set of 
@@ -46,7 +47,8 @@ public final class FindMeetingQuery {
      * interfering event TimeRanges from an initial day-long time range while
      * throwing away resulting ranges that are less than duration. Although we
      * no longer require sorting, this approach retains the same worst case 
-     * runtime and is more logically complex to code.
+     * runtime if each event splits a remaining range into two pieces of 
+     * valid duration. Furthermore, it is more logically complex to code.
      */
     public Collection<TimeRange> findMeetingTimes(
         Collection<Event> events,    
@@ -93,7 +95,7 @@ public final class FindMeetingQuery {
      * which must attend, and set of optional attendees, that are preferred to 
      * attend but might not necessarily have to. If the algorithm does not find
      * any valid TimeRanges for all of the attendees, including optional ones,
-     * then it will only return TimeRanges for mandatory attendees. A pitfall of
+     * then it will only return TimeRanges for mandatory attendees. A drawback of
      * this approach is that we must call the function to find suitable TimeRanges
      * two times.
      *
